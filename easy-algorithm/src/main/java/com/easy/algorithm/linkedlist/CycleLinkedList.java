@@ -18,10 +18,10 @@ import java.util.Set;
 public class CycleLinkedList {
     public static void main(String[] args) {
         OneWayList<Integer> oneWayList = new OneWayList<Integer>();
-        for (int i = 0; i < 199; ++i) {
+        for (int i = 0; i < 1990000; ++i) {
             oneWayList.add(i);
         }
-        initCycle(oneWayList, 198);
+        initCycle(oneWayList, 10001100);
         System.out.println(hasCycle1(oneWayList.getHead()));
         System.out.println(hasCycle(oneWayList.getHead()));
     }
@@ -29,6 +29,9 @@ public class CycleLinkedList {
 
     private static <T> void initCycle(OneWayList<T> oneWayList, Integer index) {
         if (index < 0) {
+            return;
+        }
+        if (index > oneWayList.getSize()) {
             return;
         }
         Integer count = 0;

@@ -8,6 +8,7 @@ import com.easy.algorithm.linkedlist.node.BaseNode;
  */
 public abstract class BaseList<T> {
     private BaseNode<T> head;
+    private int size;
 
    public abstract void add(T data);
 
@@ -28,5 +29,12 @@ public abstract class BaseList<T> {
 
     public void setHead(BaseNode<T> head) {
         this.head = head;
+    }
+
+    public void addSize() {
+       size ++;
+    }
+    public Integer getSize() {
+       return this.size;
     }
 }
