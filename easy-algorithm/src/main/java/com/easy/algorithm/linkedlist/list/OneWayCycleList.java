@@ -24,6 +24,10 @@ public class OneWayCycleList<T> extends BaseList<T> {
         addSize();
     }
 
+    public void remove(OneWayNode oneWayNode) {
+
+    }
+
 
     public static void main(String[] args) {
         OneWayCycleList<Integer> oneWayCycleList = new OneWayCycleList<Integer>();
