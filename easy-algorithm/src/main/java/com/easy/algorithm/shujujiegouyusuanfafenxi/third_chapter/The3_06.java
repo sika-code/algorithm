@@ -49,7 +49,9 @@ public class The3_06 {
             }
             System.out.println("移除的人为：" + menArray[removeIndex]);
             menArray[removeIndex] = 0;
-            removeIndex = removeIndex + 1 + M ;
+            while (menArray[removeIndex+1] == 0) {
+
+            }
             restNum --;
         }
         for (int i = 0 ; i < menArray.length; ++i) {
@@ -59,6 +61,8 @@ public class The3_06 {
         }
         return 0;
     }
+
+
     public static int josephus(int M, int N) {
         if (N == 0 || N == 1) {
             return N;
