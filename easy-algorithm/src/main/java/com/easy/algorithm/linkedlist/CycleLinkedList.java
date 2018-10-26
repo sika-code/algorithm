@@ -4,10 +4,7 @@ import com.easy.algorithm.linkedlist.list.OneWayList;
 import com.easy.algorithm.linkedlist.node.BaseNode;
 import com.easy.algorithm.linkedlist.node.OneWayNode;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 单向环形链表
