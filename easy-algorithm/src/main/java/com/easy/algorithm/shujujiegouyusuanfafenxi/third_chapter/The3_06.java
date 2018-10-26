@@ -1,9 +1,9 @@
 package com.easy.algorithm.shujujiegouyusuanfafenxi.third_chapter;
 
-import com.easy.algorithm.linkedlist.list.OneWayCycleList;
-import com.easy.algorithm.linkedlist.list.TwoWayCycleList;
-import com.easy.algorithm.linkedlist.node.OneWayNode;
-import com.easy.algorithm.linkedlist.node.TwoWayNode;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Josephus问题
@@ -17,73 +17,59 @@ import com.easy.algorithm.linkedlist.node.TwoWayNode;
  * a.编写一个程序解决M和N在一般值下的Josephus问题，应使程序尽可能的高效，要确保清除各个单元
  * b.你的程序运行时间复杂度是多少
  * </pre>
- *
+ * <p>
  * 单项循环链表
  */
 public class The3_06 {
 
     public static void main(String[] args) {
-        System.out.println("剩余的人：" + josephusForArray(1, 5));
+        System.out.println("剩余的人：" + josephus(6, 50));
     }
-
-    public static int josephusForArray(int M, int N) {
-        if (M < 0) {
-            return -1;
-        }
-        if (N == 0 || N == 1) {
-            return N;
-        }
-        int [] menArray = new int[N];
-        for (int i = 0 ; i < N; ++i) {
-            menArray[i] = i+1;
-        }
-        int restNum = N;
-        int removeIndex = M;
-        while (restNum > 1) {
-            if (removeIndex >=  menArray.length) {
-                removeIndex = removeIndex % (menArray.length);
-            }
-            while (menArray[removeIndex] == 0) {
-                removeIndex ++;
-
-            }
-            System.out.println("移除的人为：" + menArray[removeIndex]);
-            menArray[removeIndex] = 0;
-            while (menArray[removeIndex+1] == 0) {
-
-            }
-            restNum --;
-        }
-        for (int i = 0 ; i < menArray.length; ++i) {
-            if (menArray[i] != 0) {
-                return menArray[i];
-            }
-        }
-        return 0;
-    }
-
 
     public static int josephus(int M, int N) {
-        if (N == 0 || N == 1) {
-            return N;
+
+        List<Integer> linkedList = new LinkedList<Integer>();
+        for (int i = 0; i < N; ++i) {
+            linkedList.add(i + 1);
         }
-        TwoWayCycleList<Integer> twoWayCycleList = new TwoWayCycleList<Integer>();
-        // 数值从1开始
-        for (int i = 1 ; i <= N; ++i) {
-            twoWayCycleList.add(i);
-        }
-        int currentCount = 1;
-        TwoWayNode<Integer> needRemoveNode = (TwoWayNode<Integer>) twoWayCycleList.getHead();
-        int restNum = N;
-        while (restNum > 1) {
-            while (currentCount <= M) {
-                currentCount ++;
-                needRemoveNode = needRemoveNode.getNext();
+        Long startTime = System.currentTimeMillis();
+        int restMen = josephus2(linkedList, M);
+        System.out.println("所用的时间为：" + (System.currentTimeMillis() - startTime));
+        return restMen;
+    }
+
+    private static int josephus1(List<Integer> list, int M) {
+        int i = 0;
+        while (list.size() > 1) {
+            for (int j = 0; j < M; ++j) {
+                i++;
             }
-            needRemoveNode.getPre().setNext(needRemoveNode.getNext());
-            needRemoveNode.getNext().setPre(needRemoveNode.getPre());
-            restNum -- ;
+            if (i >= list.size()) {
+                i = i % list.size();
+            }
+//            System.out.println("移除的为：" + linkedList.get(i));
+            list.remove(i);
         }
-        return needRemoveNode.getData();
+        return list.get(0);
+    }
+
+    private static int josephus2(List<Integer> list, int M) {
+        int count = 0;
+        Iterator<Integer> ite = list.iterator();
+        while (list.size() > 1) {
+            if (!ite.hasNext()) {
+                ite = list.iterator();
+            }
+            int temp = -1;
+            while (ite.hasNext() && count++ <= M) {
+                temp = ite.next();
+            }
+            if (count > M) {
+                count = 0;
+//               System.out.println("移除的数据为：" + temp);
+                ite.remove();
+            }
+        }
+        return list.get(0);
     }
 }
