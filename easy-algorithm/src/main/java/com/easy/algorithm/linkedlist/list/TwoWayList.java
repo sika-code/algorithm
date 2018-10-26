@@ -23,6 +23,7 @@ public class TwoWayList<T>  extends BaseList<T>{
             twoWayNode.setPre(tail);
             tail = twoWayNode;
         }
+        addSize();
     }
 
     @Override

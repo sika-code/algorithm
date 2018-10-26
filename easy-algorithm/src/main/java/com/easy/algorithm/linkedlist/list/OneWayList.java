@@ -21,6 +21,7 @@ public class OneWayList<T>  extends BaseList<T>{
             tail.setNext(newOneWayNode);
             tail = newOneWayNode;
         }
+        addSize();
     }
 
     public OneWayNode<T> getTail() {
