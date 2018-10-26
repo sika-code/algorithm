@@ -1,9 +1,18 @@
 package com.easy.algorithm.shujujiegouyusuanfafenxi.third_chapter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 3.04给定两个已排序的表L1和L2，只使用基本的表操作编写计算L1与L2的交集
  */
 public class The3_04 {
+    public static void main(String[] args) {
+        HashMap<Integer, String> map = new HashMap<Integer, String>();
+        map.put(0,"1");
+        map.put(16,"1");
+        System.out.println(50 & 15);
+    }
     public static int [] beMixed(int [] L1, int [] L2) {
         if (L1 == null || L1.length == 0) {
             return null;
